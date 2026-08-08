@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>동탄 인근 산후조리원 투어 리스트</title>
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --ink: #1f2937;
+      --muted: #667085;
+      --line: #d9dee8;
+      --panel: #ffffff;
+      --accent: #0f766e;
+      --accent-2: #7c3aed;
+      --warn: #b45309;
+      --soft: #edf7f6;
+      --soft-2: #f4f0ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 34px 0 24px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 840px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .notice {
+      margin-top: 18px;
+      padding: 13px 15px;
+      border: 1px solid #f4c27d;
+      background: #fff8ed;
+      color: #6b3d05;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      padding: 18px 0 8px;
+    }
+
+    .metric {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 15px;
+    }
+
+    .metric b {
+      display: block;
+      font-size: 22px;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    main {
+      padding: 18px 0 54px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 22px 0 12px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .source {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr);
+      min-height: 238px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .photo {
+      position: relative;
+      min-height: 100%;
+      background: linear-gradient(135deg, #e0f2fe, #fef3c7);
+    }
+
+    .photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 238px;
+    }
+
+    .fallback {
+      height: 100%;
+      min-height: 238px;
+      display: grid;
+      place-items: center;
+      padding: 14px;
+      color: #475467;
+      text-align: center;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .rank {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.95);
+      color: white;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .body {
+      padding: 16px 16px 14px;
+    }
+
+    .topline {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    .price {
+      flex: 0 0 auto;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: #0f5f59;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 0 10px;
+    }
+
+    .tag {
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: #f2f4f7;
+      color: #475467;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .tag.hot {
+      background: var(--soft-2);
+      color: #5b21b6;
+    }
+
+    .meta {
+      display: grid;
+      gap: 5px;
+      margin: 0 0 10px;
+      color: #344054;
+      font-size: 14px;
+    }
+
+    .meta div {
+      min-width: 0;
+    }
+
+    .review {
+      margin: 10px 0 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    a.button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      color: var(--ink);
+      background: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    a.button.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .compare {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .compare th,
+    .compare td {
+      border-bottom: 1px solid var(--line);
+      padding: 11px 12px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    .compare th {
+      background: #f2f4f7;
+      color: #344054;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .compare tr:last-child td { border-bottom: 0; }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+    .box h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .box ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #475467;
+      font-size: 14px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 18px 0;
+    }
+
+    @media (max-width: 900px) {
+      .summary,
+      .checklist {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        width: min(100% - 22px, 1180px);
+      }
+
+      .summary,
+      .checklist {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        grid-template-columns: 1fr;
+      }
+
+      .photo img,
+      .fallback {
+        min-height: 180px;
+        max-height: 220px;
+      }
+
+      .topline {
+        display: block;
+      }
+
+      .price {
+        display: inline-block;
+        margin-top: 8px;
+      }
+
+      .compare {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <h1>동탄 인근 산후조리원 투어 리스트</h1>
+      <p class="lead">
+        화성시 보건소 등록 가격/주소를 기준으로, 동탄 접근성·최근 후기 언급·병원 연계·프리미엄 여부를 반영해 투어 우선순위를 정리했습니다.
+      </p>
+      <div class="notice">
+        가격은 화성시 보건소 공개 목록 기준이며, 방 등급·마사지·프로모션·계약 시점에 따라 달라질 수 있습니다. 투어 예약 전 유선 확인이 필요합니다.
+      </div>
+      <div class="summary">
+        <div class="metric"><b>10곳</b><span>우선 투어 후보</span></div>
+        <div class="metric"><b>195~1200만원</b><span>공개 등록 가격 범위</span></div>
+        <div class="metric"><b>1~5순위</b><span>먼저 문의 추천</span></div>
+        <div class="metric"><b>사진/후기</b><span>공식·네이버 링크 연결</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="section-title">
+      <h2>투어 우선순위</h2>
+      <div class="source">출처: 화성시 보건소 산후조리원 목록, 공식 사이트, 네이버 공개 후기 검색</div>
+    </div>
+
+    <section class="grid">
+      <article class="card">
+        <div class="photo">
+          <span class="rank">1</span>
+          <img src="https://dtpremium.kr/files/attach/xeicon/366/default_image.png?20230623132202" alt="동탄제일프리미엄산후조리원 대표 이미지">
+        </div>
+        <div class="body">
+          <div class="topline">
+            <h3>동탄제일프리미엄산후조리원</h3>
+            <span class="price">320/380만원</span>
+          </div>
+          <div class="tags"><span class="tag hot">병원 라인</span><span class="tag">프리미엄</span><span class="tag">후기 많음</span></div>
+          <div class="meta">
+            <div><b>위치</b> 화성시 동탄구 삼성1로 138, 5~7층</div>
+            <div><b>전화</b> 031-8015-7938</div>
+          </div>
+          <p class="review">동탄제일병원 접근성과 시설 선호도가 강점. 인기 룸은 조기 마감 언급이 있어 가장 먼저 문의할 후보입니다.</p>
+          <div class="actions">
+            <a class="button primary" href="https://dtpremium.kr/" target="_blank" rel="noreferrer">공식/사진</a>
+            <a class="button" href="https://map.naver.com/p/search/동탄제일프리미엄산후조리원" target="_blank" rel="noreferrer">지도</a>
+            <a class="button" href="https://search.naver.com/search.naver?where=view&amp;query=동탄제일프리미엄산후조리원%20후기" target="_blank" rel="noreferrer">후기</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo">
+          <span class="rank">2</span>
+          <img src="https://dtjs.kr/files/attach/xeicon/279/default_image.png?t=1713234775" alt="동탄제일제이에스 산후조리원 대표 이미지">
+        </div>
+        <div class="body">
+          <div class="topline">
+            <h3>동탄제일제이에스 산후조리원</h3>
+            <span class="price">624만원</span>
+          </div>
+          <div class="tags"><span class="tag hot">JS</span><span class="tag">프리미엄</span><span class="tag">최근 후기</span></div>
+          <div class="meta">
+            <div><b>위치</b> 화성시 동탄구 동탄영천로 118, 2~4층</div>
+            <div><b>전화</b> 031-548-1809</div>
+          </div>
+          <p class="review">최근 맘카페·블로그에서 방 컨디션, 신생아 케어, 시설 언급이 많습니다. 가격대는 높은 편입니다.</p>
+          <div class="actions">
+            <a class="button primary" href="https://dtjs.kr/" target="_blank" rel="noreferrer">공식/사진</a>
+            <a class="button" href="https://map.naver.com/p/search/동탄제일제이에스산후조리원" target="_blank" rel="noreferrer">지도</a>
+            <a class="button" href="https://search.naver.com/search.naver?where=view&amp;query=동탄%20JS%20산후조리원%20후기" target="_blank" rel="noreferrer">후기</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo">
+          <span class="rank">3</span>
+          <img src="https://cdn.imweb.me/upload/S2026022274e32e1464e0d/f424fdb245b96.png" alt="더온산후조리원 대표 이미지">
+        </div>
+        <div class="body">
+          <div class="topline">
+            <h3>더온산후조리원 동탄점</h3>
+            <span class="price">500~900만원</span>
+          </div>
+          <div class="tags"><span class="tag hot">하이엔드</span><span class="tag">호수공원권</span><span class="tag">신축 후보</span></div>
+          <div class="meta">
+            <div><b>위치</b> 화성시 동탄구 동탄순환대로 4, 2층</div>
+            <div><b>전화</b> 0507-1477-7813</div>
+          </div>
+          <p class="review">신축·소수 정원·프리미엄 포지션. 최근 투어/예약 후기가 생기고 있어 상위 후보로 볼 만합니다.</p>
+          <div class="actions">
+            <a class="button primary" href="https://dt-theonn.co.kr/" target="_blank" rel="noreferrer">공식/사진</a>
+            <a class="button" href="https://map.naver.com/p/search/더온산후조리원%20동탄" target="_blank" rel="noreferrer">지도</a>
+            <a class="button" href="https://search.naver.com/search.naver?where=view&amp;query=더온%20산후조리원%20동탄%20후기" target="_blank" rel="noreferrer">후기</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo">
+          <span class="rank">4</span>
+          <div class="fallback">오르페<br>공식 사진 보기</div>
+        </div>
+        <div class="body">
+          <div class="topline">
+            <h3>오르페 산후조리원</h3>
+            <span class="price">590~1200만원</span>
+          </div>
+          <div class="tags"><span class="tag hot">고가 프리미엄</span><span class="tag">신생 후보</span><span class="tag">후기 증가</span></div>
+          <div class="meta">
+            <div><b>위치</b> 화성시 동탄구 노작로1가길 8, 5층</div>
+            <div><b>전화</b> 0507-1337-0760</div>
+          </div>
+          <p class="review">가장 높은 가격대. 방 크기, 남편 동반, 신생아실 CCTV/캠, 회진 빈도 확인이 중요합니다.</p>
+          <div class="actions">
+            <a class="button primary" href="http://orphe.co.kr/" target="_blank" rel="noreferrer">공식/사진</a>
+            <a class="button" href="https://map.naver.com/p/search/오르페%20산후조리원" target="_blank" rel="noreferrer">지도</a>
+            <a class="button" href="https://search.naver.com/search.naver?where=view&amp;query=오르페%20산후조리원%20후기" target="_blank" rel="noreferrer">후기</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo">
+          <span class="rank">5</span>
+          <img src="http://www.i-sori.com/uploads/pw1602005/201612/fc828537fcb84497fffac0982cb8342b_crop.png" alt="아이소리산후조리원 대표 이미지">
+        </div>
+        <div class="body">
+          <div class="topline">
+            <h3>아이소리산후조리원</h3>
+            <span class="price">245/265만원</span>
+          </div>
+          <div class="tags"><span class="tag hot">가성비</span><span class="tag">식사 후기</span><span class="tag">반송동</span></div>
+          <div class="meta">
+            <div><b>위치</b> 화성시 동탄구 동탄문화센터로 61, 3층</div>
+            <div><b>전화</b> 031-8015-2022</div>
+          </div>
+          <p class="review">식사, 마사지, 가성비 후기가 자주 보입니다. 프리미엄보다 실속형을 원하면 꼭 비교할 곳입니다.</p>
+          <div class="actions">
+            <a class="button primary" href="http://www.i-sori.com/" target="_blank" rel="noreferrer">공식/사진</a>
+            <a class="button" href="https://map.naver.com/p/search/아이소리산후조리원" target="_blank" rel="noreferrer">지도</a>
+            <a class="button" href="https://search.naver.com/search.naver?where=view&amp;query=아이소리%20산후조리원%20후기" target="_blank" rel="noreferrer">후기</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo">
+          <span class="rank">6</span>
+          <div class="fallback">센트럴<br>공식 사진 보기</div>
+        </div>
+        <div class="body">
+          <div class="topline">
+            <h3>센트럴산후조리원</h3>
+            <span class="price">220~260만원</span>
+          </div>
+          <div class="tags"><span class="tag hot">실속형</span><span class="tag">동탄1</span><span class="tag">오래된 후보</span></div>
+          <div class="meta">
+            <div><b>위치</b> 화성시 동탄구 동탄지성로 126, 4~5층</div>
+            <div><b>전화</b> 031-8003-5445</div>
+          </div>
+          <p class="review">동탄맘 추천 언급이 있고, 20년 이상 경력 원장/모유수유 전문성을 내세웁니다. 시설 컨디션은 투어에서 확인하세요.</p>
+          <div class="actions">
+            <a class="button primary" href="http://www.centralcare.co.kr/" target="_blank" rel="noreferrer">공식/사진</a>
+            <a class="button" href="https://map.naver.com/p/search/센트럴산후조리원%20동탄" target="_blank" rel="noreferrer">지도</a>
+            <a class="button" href="https://search.naver.com/search.naver?where=view&amp;query=센트럴%20산후조리원%20동탄%20후기" target="_blank" rel="noreferrer">후기</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo">
+          <span class="rank">7</span>
+          <img src="https://mizparkmedical.com/assets/images/photo/og-care-v2.jpg" alt="미즈파크산후조리원 대표 이미지">
+        </div>
+        <div class="body">
+          <div class="topline">
+            <h3>미즈파크산후조리원</h3>
+            <span class="price">215/230만원</span>
+          </div>
+          <div class="tags"><span class="tag hot">분만 병원 연계</span><span class="tag">같은 건물</span><span class="tag">24시간 케어</span></div>
+          <div class="meta">
+            <div><b>위치</b> 화성시 동탄구 동탄지성로 139, 2·5층</div>
+            <div><b>전화</b> 031-8015-9710</div>
+          </div>
+          <p class="review">분만 후 같은 건물에서 회복하는 동선이 장점입니다. 병원 연계와 비용 효율을 중시하면 후보입니다.</p>
+          <div class="actions">
+            <a class="button primary" href="https://mizparkmedical.com/care/" target="_blank" rel="noreferrer">공식/사진</a>
+            <a class="button" href="https://map.naver.com/p/search/미즈파크산후조리원" target="_blank" rel="noreferrer">지도</a>
+            <a class="button" href="https://search.naver.com/search.naver?where=view&amp;query=미즈파크%20산후조리원%20후기" target="_blank" rel="noreferrer">후기</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo">
+          <span class="rank">8</span>
+          <div class="fallback">노블아이<br>지도/후기 확인</div>
+        </div>
+        <div class="body">
+          <div class="topline">
+            <h3>노블아이 산후조리원</h3>
+            <span class="price">400~500만원*</span>
+          </div>
+          <div class="tags"><span class="tag hot">투어 비교 후보</span><span class="tag">동탄2권</span><span class="tag">가격 확인 필요</span></div>
+          <div class="meta">
+            <div><b>위치</b> 화성시 동탄구 동탄신리천로 254, 5층</div>
+            <div><b>전화</b> 031-8077-2292</div>
+          </div>
+          <p class="review">투어 비교 글에 자주 등장합니다. 보건소 목록의 가격 표기가 비정상적으로 보여 실제 가격은 유선 확인하세요.</p>
+          <div class="actions">
+            <a class="button primary" href="https://map.naver.com/p/search/노블아이%20산후조리원" target="_blank" rel="noreferrer">지도/사진</a>
+            <a class="button" href="https://search.naver.com/search.naver?where=view&amp;query=노블아이%20산후조리원%20동탄%20후기" target="_blank" rel="noreferrer">후기</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo">
+          <span class="rank">9</span>
+          <div class="fallback">마벨르<br>공식 사진 보기</div>
+        </div>
+        <div class="body">
+          <div class="topline">
+            <h3>마벨르산후조리원 화성동탄점</h3>
+            <span class="price">400만원</span>
+          </div>
+          <div class="tags"><span class="tag hot">반월동</span><span class="tag">동탄 생활권</span><span class="tag">비교 후보</span></div>
+          <div class="meta">
+            <div><b>위치</b> 화성시 병점구 영통로50번길 49, 2층</div>
+            <div><b>전화</b> 031-273-6644</div>
+          </div>
+          <p class="review">동탄·용인권 조리원 투어 비교 글에 함께 나옵니다. 동탄 중심부와 이동시간을 함께 체크하세요.</p>
+          <div class="actions">
+            <a class="button primary" href="https://mabelledt.modoo.at/" target="_blank" rel="noreferrer">공식/사진</a>
+            <a class="button" href="https://map.naver.com/p/search/마벨르산후조리원%20화성동탄점" target="_blank" rel="noreferrer">지도</a>
+            <a class="button" href="https://search.naver.com/search.naver?where=view&amp;query=마벨르%20산후조리원%20화성동탄점%20후기" target="_blank" rel="noreferrer">후기</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="photo">
+          <span class="rank">10</span>
+          <div class="fallback">동탄제일<br>기본형 후보</div>
+        </div>
+        <div class="body">
+          <div class="topline">
+            <h3>동탄제일산후조리원</h3>
+            <span class="price">240만원</span>
+          </div>
+          <div class="tags"><span class="tag hot">동탄제일병원권</span><span class="tag">기본형</span><span class="tag">가격 비교</span></div>
+          <div class="meta">
+            <div><b>위치</b> 화성시 동탄구 동탄중앙로 381-7, 5~7층</div>
+            <div><b>전화</b> 031-8015-1115</div>
+          </div>
+          <p class="review">동탄제일병원 협력 라인의 기본형 후보입니다. 프리미엄 라인과 비용 차이를 비교하기 좋습니다.</p>
+          <div class="actions">
+            <a class="button primary" href="https://map.naver.com/p/search/동탄제일산후조리원" target="_blank" rel="noreferrer">지도/사진</a>
+            <a class="button" href="https://search.naver.com/search.naver?where=view&amp;query=동탄제일산후조리원%20후기" target="_blank" rel="noreferrer">후기</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="section-title">
+      <h2>한눈에 비교</h2>
+    </div>
+
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>순위</th>
+          <th>이름</th>
+          <th>가격</th>
+          <th>주소</th>
+          <th>투어 포인트</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>동탄제일프리미엄</td><td>320/380</td><td>삼성1로 138</td><td>동탄제일병원 접근성, 인기 룸 마감 여부</td></tr>
+        <tr><td>2</td><td>동탄제일제이에스</td><td>624</td><td>동탄영천로 118</td><td>방 크기, 신생아 케어 비율, 남편 동반 조건</td></tr>
+        <tr><td>3</td><td>더온</td><td>500~900</td><td>동탄순환대로 4</td><td>신축/소수정원, 감염관리, 가격 포함 항목</td></tr>
+        <tr><td>4</td><td>오르페</td><td>590~1200</td><td>노작로1가길 8</td><td>고가 프리미엄 대비 서비스 범위</td></tr>
+        <tr><td>5</td><td>아이소리</td><td>245/265</td><td>동탄문화센터로 61</td><td>식사, 마사지, 가성비, 시설 연식</td></tr>
+        <tr><td>6</td><td>센트럴</td><td>220~260</td><td>동탄지성로 126</td><td>모유수유 지원, 신생아실 인력, 시설 컨디션</td></tr>
+        <tr><td>7</td><td>미즈파크</td><td>215/230</td><td>동탄지성로 139</td><td>분만 병원 동선, 회진, 같은 건물 이동</td></tr>
+        <tr><td>8</td><td>노블아이</td><td>400~500*</td><td>동탄신리천로 254</td><td>실제 가격 재확인, 룸 등급별 차이</td></tr>
+        <tr><td>9</td><td>마벨르 화성동탄점</td><td>400</td><td>영통로50번길 49</td><td>동탄 중심부와 이동시간, 마사지 포함 여부</td></tr>
+        <tr><td>10</td><td>동탄제일</td><td>240</td><td>동탄중앙로 381-7</td><td>기본형 가격, 병원 연계 범위</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">
+      <h2>투어 때 바로 물어볼 질문</h2>
+    </div>
+
+    <section class="checklist">
+      <div class="box">
+        <h3>가격/계약</h3>
+        <ul>
+          <li>예정일 기준 빈방 여부</li>
+          <li>2주 최종가와 예약금</li>
+          <li>취소/환불 규정</li>
+          <li>마사지 포함 횟수와 추가가</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>신생아 케어</h3>
+        <ul>
+          <li>신생아실 인력 비율</li>
+          <li>소아과 회진 빈도</li>
+          <li>CCTV/캠 운영 여부</li>
+          <li>감염관리와 면회 정책</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>산모 생활</h3>
+        <ul>
+          <li>남편 숙박/식사 가능 여부</li>
+          <li>모자동실 운영 방식</li>
+          <li>방 크기, 침대, 좌욕실</li>
+          <li>제왕절개 산모 편의시설</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      작성일: 2026-08-06. 사진은 각 조리원 공식 사이트 또는 네이버 지도/후기 링크로 연결했습니다. 실제 계약 전 최신 가격과 빈방 여부를 확인하세요.
+    </div>
+  </footer>
+</body>
+</html>

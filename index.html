@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>모바일 리포트</title>
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #d9dee7;
+      --panel: #ffffff;
+      --blue: #245fa8;
+      --green: #1f7a5c;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+      line-height: 1.5;
+      letter-spacing: 0;
+    }
+    header {
+      padding: 26px 16px 18px;
+      background: #172033;
+      color: #fff;
+    }
+    main {
+      width: min(100% - 20px, 720px);
+      margin: 0 auto;
+      padding: 18px 0 36px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1.2;
+    }
+    .lead {
+      margin: 10px 0 0;
+      color: #d3deec;
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+    a.card {
+      display: block;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel);
+      color: inherit;
+      text-decoration: none;
+    }
+    .label {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .label.blue { background: var(--blue); }
+    h2 {
+      margin: 0 0 6px;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .arrow {
+      margin-top: 14px;
+      color: var(--blue);
+      font-weight: 900;
+      font-size: 14px;
+    }
+    footer {
+      width: min(100% - 20px, 720px);
+      margin: 0 auto;
+      padding: 0 0 24px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>모바일 리포트</h1>
+    <p class="lead">휴대폰에서 바로 보기 좋게 정리한 HTML 페이지입니다.</p>
+  </header>
+  <main>
+    <div class="grid">
+      <a class="card" href="postpartum.html">
+        <span class="label">산후조리원</span>
+        <h2>동탄 인근 산후조리원 투어 리스트</h2>
+        <p>가격, 위치, 후기 링크, 투어 우선순위를 모바일 카드형으로 정리했습니다.</p>
+        <div class="arrow">열기 →</div>
+      </a>
+      <a class="card" href="cars.html">
+        <span class="label blue">중고차</span>
+        <h2>정비 편한 신차·신차급 중고 비교</h2>
+        <p>공식 신차가와 신차급 중고가, 정비 편의 기준을 비교했습니다.</p>
+        <div class="arrow">열기 →</div>
+      </a>
+    </div>
+  </main>
+  <footer>Updated for mobile viewing.</footer>
+</body>
+</html>
