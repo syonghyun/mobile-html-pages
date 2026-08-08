@@ -297,6 +297,74 @@
 
     .compare tr:last-child td { border-bottom: 0; }
 
+    .detail-note {
+      margin: 8px 0 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .comparison-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .detail-compare {
+      min-width: 980px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .detail-compare th,
+    .detail-compare td {
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+    }
+
+    .detail-compare th {
+      background: #f2f4f7;
+      color: #344054;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .detail-compare th:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background: #eef4f3;
+    }
+
+    .detail-compare td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      width: 142px;
+      background: #fbfcfd;
+      color: #344054;
+      font-weight: 800;
+    }
+
+    .detail-compare tr:last-child td { border-bottom: 0; }
+    .detail-compare th:last-child,
+    .detail-compare td:last-child { border-right: 0; }
+
+    .verdict {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .verdict .box {
+      border-top: 3px solid var(--accent);
+    }
+
     .checklist {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -333,7 +401,8 @@
 
     @media (max-width: 900px) {
       .summary,
-      .checklist {
+      .checklist,
+      .verdict {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -348,7 +417,8 @@
       }
 
       .summary,
-      .checklist {
+      .checklist,
+      .verdict {
         grid-template-columns: 1fr;
       }
 
@@ -374,6 +444,10 @@
       .compare {
         display: block;
         overflow-x: auto;
+      }
+
+      .detail-compare {
+        min-width: 920px;
       }
     }
   </style>
@@ -670,6 +744,131 @@
         <tr><td>10</td><td>동탄제일</td><td>240</td><td>동탄중앙로 381-7</td><td>기본형 가격, 병원 연계 범위</td></tr>
       </tbody>
     </table>
+
+    <div class="section-title">
+      <h2>상위 4곳 상세 비교</h2>
+      <div class="source">기준: 가장 기본 룸, 2주(13박 14일), 공식 요금 우선</div>
+    </div>
+    <p class="detail-note">
+      동탄제일프리미엄·JS·더온은 공식 요금 페이지 기준입니다. 오르페는 공식 사이트에 요금표가 공개되어 있지 않아 공개 후기의 기본 스위트 가격 언급을 기준으로 임시 정리했으며, 상담 시 최종 확인이 필요합니다.
+    </p>
+
+    <section class="comparison-wrap" aria-label="상위 4곳 산후조리원 상세 비교표">
+      <table class="detail-compare">
+        <thead>
+          <tr>
+            <th>항목</th>
+            <th>동탄제일프리미엄산후조리원</th>
+            <th>동탄제일제이에스 산후조리원</th>
+            <th>더온 산후조리원 동탄호수공원점</th>
+            <th>오르페 산후조리원</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>기본 룸 / 2주 가격</td>
+            <td><b>Standard 420만원</b><br>10일 310만원, 2주 420만원. 기존 보건소 목록/후기 가격보다 공식 최신 요금이 높게 확인됨.</td>
+            <td><b>Aria/Classic 715만원</b><br>동탄제일병원 연계 프로모션가 600만원 표기. 기본 룸도 고가 프리미엄 구간.</td>
+            <td><b>Executive Suite 800만원</b><br>가장 기본 등급으로 확인되는 2주 요금. 상위 Signature Suite는 950만원.</td>
+            <td><b>Suite 약 650만원부터</b><br>공식 요금표 미공개. 공개 후기 기준 기본 스위트 650만원 출발 언급, 상담 확인 필수.</td>
+          </tr>
+          <tr>
+            <td>룸 구성 / 객실감</td>
+            <td>Standard A/B 타입. 65인치 스마트 TV, 모션베드급 침대, 원목가구 중심의 기본 프리미엄 룸.</td>
+            <td>Aria 기준 10.5평형. 시몬스 매트리스, 대형 LED TV 2대, 고급 침구, 다이슨 가전 구성.</td>
+            <td>소수 객실 하이엔드 콘셉트. 공식 가격표상 Executive/Signature 두 등급으로 단순하게 나뉨.</td>
+            <td>기본 스위트도 공간이 넓다는 후기 다수. 상위 룸은 안마의자, 스타일러, 스탠바이미 추가 언급.</td>
+          </tr>
+          <tr>
+            <td>포함 서비스</td>
+            <td>숙박, 식사, 신생아·산모 케어, 청소/세탁, 편의시설 이용. 아기 아빠 취침 가능 안내.</td>
+            <td>숙박, 1일 3식, 간식 3회, 신생아/산모 케어, 청소·세탁, 보호자 식사 서비스, 조식, 교육, 스튜디오 촬영, 산전산후 스파.</td>
+            <td>숙박, 1일 3식, 간식 3회, 24시간 3교대 신생아&산모 케어, 매일 청소·세탁, 교육, 유축기/좌욕기 등 편의시설.</td>
+            <td>웰컴 기프트, 웰컴 다이닝 1회, King 모션베드, 다이슨 드라이기, 냉온정수기, 메델라 유축기, 공기청정기 언급.</td>
+          </tr>
+          <tr>
+            <td>마사지 / 케어</td>
+            <td>마사지 문의 별도. 포함 횟수와 산전·산후 케어 범위는 상담 때 재확인 권장.</td>
+            <td>Aria 기준 산전케어 2회, 산후케어 1회, 고압산소챔버 1회, 온열테라피 챔버 1회, 헤드스파 1회.</td>
+            <td>공식 가격표에는 산후 관리 및 신생아 관리 교육 포함. 마사지/스파 구체 횟수는 상담 확인 필요.</td>
+            <td>후기상 마사지·힐링룸 만족 언급이 있으나 기본 포함 횟수와 추가 단가는 공식 확인 필요.</td>
+          </tr>
+          <tr>
+            <td>신생아 케어 / 감염관리</td>
+            <td>입실 전 RSV 검사, 감염 의심 시 입실 불가. 외부인 면회 제한, 신생아 보호 강조.</td>
+            <td>Aria 기준 신생아 케어 3:1 표기. 동탄제일병원 라인 연계 기대감이 장점.</td>
+            <td>24시간 3교대 케어. 37주 이하 또는 2.5kg 이하 신생아 입소 제한, 배우자 외 방문·면회 금지.</td>
+            <td>소수 정원·프리미엄 운영으로 보이나 신생아실 인력비율, 회진, CCTV/캠은 투어 때 반드시 확인.</td>
+          </tr>
+          <tr>
+            <td>보호자 / 면회</td>
+            <td>아기 아빠 취침 가능. 가족/친지/지인 면회는 제한 안내.</td>
+            <td>보호자 식사 서비스 포함 표기, 보호자 추가 식사 1식 3만원. 숙박 조건은 상담 확인.</td>
+            <td>보호자는 배우자 기준. 2주 이용 시 입실 당일 점심 1회와 자율 신청 2회 무료, 추가 식사 1식 2.5만원.</td>
+            <td>남편 동반/식사/숙박 조건은 후기마다 체감 차이가 있어 계약 전 명확히 확인 필요.</td>
+          </tr>
+          <tr>
+            <td>추가 비용</td>
+            <td>다태아 1명 추가 2주 180만원. 조기퇴실 시 소비자보호법 기준 위약금 공제.</td>
+            <td>다둥이 케어 1명 1일 19만원. 보호자 식사 1식 3만원.</td>
+            <td>다둥이 추가 2주 200만원. 1박 연장 Executive 75만원, Signature 90만원.</td>
+            <td>다둥이, 보호자 식사, 마사지 추가 비용은 공식 상담 필요.</td>
+          </tr>
+          <tr>
+            <td>입퇴실 / 준비</td>
+            <td>입실 10:30, 퇴실 09:30. 수건, 내의, 속옷, 수면양말, 세면도구, 마스크, 신생아 손수건 준비.</td>
+            <td>입실 당일 12시 전, 퇴실 09:30. 산모 수건/내의/속옷/수면양말, 신생아 손수건 20장 등 준비.</td>
+            <td>입실 11:00, 퇴실 10:00. 1주, 9박10일, 2주 이용 가능.</td>
+            <td>공식 사이트 기본 정보가 제한적. 투어 예약 시 입퇴실 시간과 준비물 리스트 요청 필요.</td>
+          </tr>
+          <tr>
+            <td>강점</td>
+            <td>동탄제일병원 접근성, 기존 후기량, 프리미엄 대비 가장 낮은 가격대.</td>
+            <td>공식 기준 서비스 항목이 가장 촘촘하고, 신생아 케어 비율/스파 구성 표기가 명확함.</td>
+            <td>소수 객실, 배우자 외 면회 제한, 감염관리 기준이 명확한 하이엔드 후보.</td>
+            <td>새 시설감, 넓은 룸 체감, 동탄 중심 접근성. 후기상 만족도 높은 편.</td>
+          </tr>
+          <tr>
+            <td>주의점</td>
+            <td>구 가격과 공식 최신가 차이가 큼. 마사지 포함 여부, 빈방, 룸 A/B 차이를 확인해야 함.</td>
+            <td>정가와 프로모션가 차이가 커서 실제 적용 조건 확인 필요. 기본가가 이미 600만원대 이상.</td>
+            <td>기본 룸 가격이 800만원으로 4곳 중 가장 높음. 마사지 포함 범위가 가격표만으로는 불명확.</td>
+            <td>공식 요금표 미확인. 공개 후기 가격은 계약 시점/오픈 프로모션에 따라 달라질 수 있음.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="verdict">
+      <div class="box">
+        <h3>가격 우선</h3>
+        <ul>
+          <li>동탄제일프리미엄</li>
+          <li>기본 420만원으로 상위 4곳 중 가장 낮음</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>서비스 명확성</h3>
+        <ul>
+          <li>JS</li>
+          <li>케어·스파·신생아 비율 표기가 가장 구체적</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>프라이빗/감염관리</h3>
+        <ul>
+          <li>더온</li>
+          <li>소수 객실, 배우자 외 면회 금지 기준 명확</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>투어 확인형</h3>
+        <ul>
+          <li>오르페</li>
+          <li>시설 후기는 좋지만 공식 요금·포함 범위 확인 필요</li>
+        </ul>
+      </div>
+    </section>
 
     <div class="section-title">
       <h2>투어 때 바로 물어볼 질문</h2>
